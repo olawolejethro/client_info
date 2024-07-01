@@ -33,19 +33,6 @@ router.get("/hello", async (req, res) => {
 
     const country = locationData.country;
 
-    // console.log(city, "andbdgdg", country);
-
-    // Get the weather data
-    // const apiKey = process.env.OPENWEATHERMAP_API_KEY;
-    // console.log(apiKey, "apikey");
-    // const weatherResponse = await axios.get(
-    //   `http://api.openweathermap.org/data/3.0/weather?q=${city}&appid=${apiKey}&units=metric`
-    // );
-
-    // console.log(weatherData, "weather");
-    // const weatherData = weatherResponse.data;
-    // const temperature = weatherData.main.temp;
-
     res.json({
       client_ip: IP,
       location: `${city}, ${country}`,
