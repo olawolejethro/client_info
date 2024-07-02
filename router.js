@@ -7,23 +7,23 @@ require("dotenv").config();
 
 router.get("/hello", async (req, res) => {
   const visitorName = req.query.visitor_name || "Guest";
+  // const clientIp = req.ip;
 
-  console.log(visitorName);
-  const clientIp = req.ip;
+  const clientIp =
+    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
   const clientIpDetails = clientIp.split(":");
   const clientIpAdress = clientIpDetails[clientIpDetails.length - 1];
-  //   const clientIp =
-  //     req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-  console.log(clientIpAdress, "IP");
 
-  const IP = "105.112.197.65";
+  console.log(clientIpAdress, "clinet");
+  // const IP = "105.112.197.65";
   try {
     // Get the location of the IP address
-    const locationResponse = await axios.get(`http://ip-api.com/json/${IP}`);
+    const locationResponse = await axios.get(
+      `http://ip-api.com/json/${clientIpAdress}`
+    );
 
     const locationData = locationResponse.data;
-    console.log(locationData, "locationdatete");
 
     if (locationData.status === "fail") {
       return res.status(500).json({ error: "Could not determine location." });
