@@ -34,7 +34,7 @@ router.get("/hello", async (req, res) => {
     const country = locationData.country;
 
     res.json({
-      client_ip: IP,
+      client_ip: clientIpAdress,
       location: `${city}, ${country}`,
       greeting: `Hello, ${visitorName}! The temperature is 38 degrees Celsius in ${city}.`,
     });
