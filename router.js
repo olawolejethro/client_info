@@ -7,7 +7,6 @@ require("dotenv").config();
 
 router.get("/hello", async (req, res) => {
   const visitorName = req.query.visitor_name || "Guest";
-  // const clientIp = req.ip;
 
   const clientIp =
     req.headers["x-forwarded-for"] || req.connection.remoteAddress;
@@ -15,8 +14,6 @@ router.get("/hello", async (req, res) => {
   const clientIpDetails = clientIp.split(":");
   const clientIpAdress = clientIpDetails[clientIpDetails.length - 1];
 
-  console.log(clientIpAdress, "clinet");
-  // const IP = "105.112.197.65";
   try {
     // Get the location of the IP address
     const locationResponse = await axios.get(
@@ -30,7 +27,6 @@ router.get("/hello", async (req, res) => {
     }
 
     const city = locationData.city;
-
     const country = locationData.country;
 
     res.json({
